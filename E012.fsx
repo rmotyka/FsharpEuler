@@ -11,6 +11,17 @@ let findFactorsOf(n:int64) =
     |> Seq.filter (fun x -> n % x = 0L) 
     |> Seq.collect (fun x -> [x; n/x])
 
+let getDivisors (n:int64) = 
+    let rec aux n f powers =
+        if n > 1L then
+            if n % f = 0L then
+                aux (n / f) f (f::powers)
+            else
+                aux n (f + 1L) powers
+        else
+            powers
+    aux n 2L []    
+
 let numberOfFactors n =
     n |> findFactorsOf |> Seq.length
 
@@ -28,4 +39,21 @@ generateTriangeNumbers
 1+2+3+4
 
 *)
+
+(*
+def get_number_of_divisors(n):
+    powers = {}
+    f = 2
+    while n > 1:
+        if n % f == 0:
+            powers[f] = powers.get(f, 0) + 1
+            n /= f
+        else:
+            f += 1
+
+    if powers:
+        return reduce(lambda a,b: a*b, [p+1 for p in powers.values()])
+    return 1
+*)
+
 
