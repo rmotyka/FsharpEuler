@@ -23,7 +23,7 @@ let getDivisors (n:int64) =
     aux n 2L []    
 
 let numberOfFactors n =
-    n |> findFactorsOf |> Seq.length
+    n |> getDivisors |> Seq.length
 
 generateTriangeNumbers 
 |> Seq.map(fun (index, tri) -> (tri, numberOfFactors tri))
