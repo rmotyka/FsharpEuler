@@ -8,7 +8,7 @@ let leftFold item (leftSum, sum, maxLeft, i) =
 
 let maxCrossingSubarrayLeft (arr: int list) low mid =
     let result = 
-        List.foldBack leftFold arr.[low .. mid] (-999, 0, 0, mid - low)
+        List.foldBack leftFold arr.[low .. mid] (int.MinValue, 0, 0, mid - low)
     let leftSum, _, maxLeft, _ = result
     (maxLeft + low, leftSum)
 
@@ -23,7 +23,7 @@ let rightFold (rightSum, sum, maxLeft, i) item =
 let maxCrossingSubarrayRight (arr: int list) mid high =
     let result = 
         arr.[mid .. high] 
-        |> List.fold rightFold (-999, 0, 0, 0)
+        |> List.fold rightFold (int.MinValue, 0, 0, 0)
     let leftSum, sum, maxRight, i = result
     (maxRight + mid + 1, leftSum)    
 
